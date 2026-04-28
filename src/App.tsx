@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router'
-import Home from './pages/Home'
+import GeneratorPage from './pages/GeneratorPage'
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<GeneratorPage />} />
     </Routes>
   )
 }

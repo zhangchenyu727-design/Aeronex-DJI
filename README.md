@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+# Saudi CI/PL Generator - Web Version
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 启动方式
 
-Currently, two official plugins are available:
+### 方式一：一键启动（推荐）
+```bash
+# 安装依赖（首次只需执行一次）
+pip install fastapi uvicorn python-multipart pandas openpyxl PyPDF2
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 启动服务
+python python_backend/main.py
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+然后打开浏览器访问 `http://localhost:8002`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 方式二：前后端分离启动（开发模式）
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+后端：
+```bash
+python python_backend/main.py
+```
+
+前端（另一个终端）：
+```bash
+npm run dev
+```
+
+## 项目结构
+```
+├── python_backend/       Python FastAPI 后端
+│   ├── main.py           API 入口
+│   ├── parsers.py        PI/AR 解析逻辑
+│   ├── builder.py        Excel 生成逻辑
+│   ├── utils.py          工具函数
+│   └── data/             模板和映射表
+├── src/                  React 前端源码
+│   └── pages/
+│       └── GeneratorPage.tsx  主页面
+└── dist/                 前端构建输出
 ```
