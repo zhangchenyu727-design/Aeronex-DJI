@@ -4,11 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
 import { Loader2, FileText, CheckCircle, Package, AlertCircle, Mail, Home } from 'lucide-react'
-import { parsePIPDF, parsePIExcel, parseARExcel } from '@/lib/parser'
-import { loadEanMap, loadHsCodeMap, loadTemplateBuffer } from '@/lib/dataLoader'
-import { buildCombined } from '@/lib/builder'
-import { mapCbToEan, summarizePackages } from '@/lib/utils'
-import type { ParsedPI, ParsedAR, ARItem } from '@/lib/utils'
+import { parsePIPDF, parsePIExcel, parseARExcel } from './lib/parser'
+import { loadEanMap, loadHsCodeMap, loadTemplateBuffer } from './lib/dataLoader'
+import { buildCombined } from './lib/builder'
+import { mapCbToEan, summarizePackages } from './lib/utils'
+import type { ParsedPI, ParsedAR, ARItem } from './lib/utils'
 
 export default function GeneratorPage() {
   const [step, setStep] = useState(1)

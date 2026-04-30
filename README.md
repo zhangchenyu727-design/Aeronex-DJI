@@ -1,40 +1,43 @@
-# Saudi CI/PL Generator - Web Version
+# AERONEX CI/PL Generator
 
-## 启动方式
+## Hong Kong CI/PL Generator
 
-### 方式一：一键启动（推荐）
+### 一键启动（前后端一体化）
+
 ```bash
-# 安装依赖（首次只需执行一次）
-pip install fastapi uvicorn python-multipart pandas openpyxl PyPDF2
-
-# 启动服务
-python python_backend/main.py
+cd python_backend
+python3 -m uvicorn main:app --host 0.0.0.0 --port 8001
 ```
 
-然后打开浏览器访问 `http://localhost:8002`
+然后浏览器打开 **http://localhost:8001**
 
-### 方式二：前后端分离启动（开发模式）
+后端同时提供：
+- 前端页面（`/`、`/hongkong`、`/saudi`、`/dubai`）
+- API接口（`/api/hk/parse` 等）
 
-后端：
+### 本地开发模式（热更新）
+
+需要两个终端：
+
+**终端1 - 后端：**
 ```bash
-python python_backend/main.py
+cd python_backend
+python3 -m uvicorn main:app --host 0.0.0.0 --port 8001 --reload
 ```
 
-前端（另一个终端）：
+**终端2 - 前端：**
 ```bash
 npm run dev
 ```
 
-## 项目结构
-```
-├── python_backend/       Python FastAPI 后端
-│   ├── main.py           API 入口
-│   ├── parsers.py        PI/AR 解析逻辑
-│   ├── builder.py        Excel 生成逻辑
-│   ├── utils.py          工具函数
-│   └── data/             模板和映射表
-├── src/                  React 前端源码
-│   └── pages/
-│       └── GeneratorPage.tsx  主页面
-└── dist/                 前端构建输出
-```
+前端访问 http://localhost:3000（带API代理到8001）
+
+### 高精度解析原理
+
+后端使用 **Python pdfplumber** 按字符坐标精确切分列：
+
+| 传统方式 | 新方式 |
+|---------|--------|
+| 浏览器OCR（Tesseract.js）把金额`$4,678`当数量`4678` | Python pdfplumber按x坐标精确提取每列 |
+| 文本乱序拼接：`T`+`6941565984197` | 字符坐标排序：`6937224123625 \| Battery \| 36 \| 853.00 \| 30708.00` |
+| 成功率 < 10% | 成功率 ≈ 100% |
