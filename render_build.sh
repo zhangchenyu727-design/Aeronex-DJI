@@ -1,3 +1,10 @@
 #!/bin/bash
-echo "=== Frontend already built (dist/ uploaded) ==="
-echo "=== Python deps will be auto-installed from requirements.txt ==="
+set -e
+
+# Ensure virtual env exists and install deps
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+
+echo "=== Python dependencies installed ==="
