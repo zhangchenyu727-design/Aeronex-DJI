@@ -6,6 +6,6 @@ npm ci
 npm run build
 
 echo "=== Installing Python dependencies ==="
-pip install fastapi uvicorn python-multipart pdfplumber openpyxl Pillow
+pip install fastapi uvicorn python-multipart pdfplumber openpyxl Pillow pandas
 
 echo "=== Build complete ==="
