@@ -1,8 +1,3 @@
 #!/bin/bash
-set -e
-
-echo "=== Building frontend ==="
-npm ci
-npm run build
-
-echo "=== Build complete ==="
+echo "=== Frontend already built (dist/ uploaded) ==="
+echo "=== Python deps will be auto-installed from requirements.txt ==="
