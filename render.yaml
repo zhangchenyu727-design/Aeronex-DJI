@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: "bash render_build.sh"
-    startCommand: "python3 -m uvicorn python_backend.main:app --host 0.0.0.0 --port 8001"
+    startCommand: "bash render_start.sh"
     healthCheckPath: /api/health
     envVars:
       - key: PYTHON_VERSION
