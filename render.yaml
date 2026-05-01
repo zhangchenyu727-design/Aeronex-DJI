@@ -1,13 +1,10 @@
 services:
   - type: web
-    name: aeronex-cipl-generator
+    name: aeronex-cipl
     runtime: python
     plan: free
-    buildCommand: "bash render_build.sh"
-    startCommand: "bash render_start.sh"
-    healthCheckPath: /api/health
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn python_backend.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11
-      - key: PYTHONUNBUFFERED
-        value: "1"
+        value: 3.11.0
